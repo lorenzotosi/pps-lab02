@@ -65,5 +65,11 @@ class TestEs2:
   @Test def testGenericCompose(): Unit = {
     val sub:(Int, Int) => Int = _ - _
     val mul:(Int, Int) => Int = _ * _
-    assertEquals(9, genericCompose(sub(_,1), mul(_,2))(5))
+    assertEquals(9, genericCompose(sub(_, 1), mul(_, 2))(5))
+    val plus: (Int, Int) => Int = _ + _
+    assertEquals("10", genericCompose(_.toString, mul(_, 2))(5))
+  }
+
+  @Test def testComposeThree(): Unit = {
+    assertEquals(composeThree[Int, Int, String, String](_ + "!", _.toString, _ * 2)(3), "6!")
   }
