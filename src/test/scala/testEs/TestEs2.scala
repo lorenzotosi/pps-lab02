@@ -54,5 +54,16 @@ class TestEs2:
   }
 
   @Test def testCurryVal(): Unit = {
-    assertTrue(curryVal(1)(2)(true))
+    val x = curryVal(1)(2)(true)
+    assertTrue(curryVal(1)(2)(x))
+  }
+
+  @Test def testCompose(): Unit = {
+    assertEquals(9, compose(_ - 1, _ * 2)(5))
+  }
+
+  @Test def testGenericCompose(): Unit = {
+    val sub:(Int, Int) => Int = _ - _
+    val mul:(Int, Int) => Int = _ * _
+    assertEquals(9, genericCompose(sub(_,1), mul(_,2))(5))
   }
