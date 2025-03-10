@@ -39,3 +39,20 @@ class TestEs2:
       ()=> assertFalse(notEmpty("")),
       ()=> assertTrue(notEmpty("foo") && !notEmpty("")))
   }
+
+  @Test def testNonCurryDef(): Unit = {
+    assertTrue(nonCurry(1,2,true))
+    assertTrue(nonCurryVal(1,2,true))
+  }
+
+  @Test def testCurryDef(): Unit = {
+    assertTrue(curry(1)(2)(true))
+  }
+
+  @Test def testNonCurryVal(): Unit = {
+    assertTrue(nonCurryVal(1,2,true))
+  }
+
+  @Test def testCurryVal(): Unit = {
+    assertTrue(curryVal(1)(2)(true))
+  }
