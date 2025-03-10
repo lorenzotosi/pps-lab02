@@ -3,6 +3,7 @@ package testEs
 import org.junit.*
 import org.junit.Assert.*
 import eslab.Es2.*
+import org.junit.jupiter.api.Assertions.assertAll
 
 class TestEs2:
 
@@ -28,4 +29,13 @@ class TestEs2:
 
   @Test def testDefFail(): Unit = {
     assertNotEquals(positive(-2), pos)
+  }
+
+  @Test def testNegWithGenerics(): Unit = {
+    val empty : String => Boolean = _ == ""
+    val notEmpty = negWithGenerics(empty)
+
+    assertAll(() => assertTrue(notEmpty("foo")),
+      ()=> assertFalse(notEmpty("")),
+      ()=> assertTrue(notEmpty("foo") && !notEmpty("")))
   }
