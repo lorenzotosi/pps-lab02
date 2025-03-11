@@ -95,8 +95,8 @@ class TestEs2:
   }
 
   @Test def testTask4(): Unit = {
-    println(Operations.show(Add(Expr.Literal(3), Multiply(Literal(5), Literal(9)))))
-    println(Operations.show(Add(Expr.Literal(3), Multiply(Literal(5), Add(Expr.Literal(150), Expr.Literal(97))))))
+    println(Operations.show(Add(Expr.Literal(3), Multiply(Literal(5), Literal(9)))))//ok
+    println(Operations.show(Add(Expr.Literal(3), Multiply(Literal(5), Add(Expr.Literal(150), Expr.Literal(97))))))//ok
     assertEquals(48, Operations.evaluate(Add(Expr.Literal(3), Multiply(Literal(5), Literal(9)))))
     assertEquals(1238, Operations.evaluate(Add(Expr.Literal(3), Multiply(Literal(5), Add(Expr.Literal(150), Expr.Literal(97))))))
   }
