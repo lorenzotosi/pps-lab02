@@ -41,9 +41,8 @@ object Es2 extends App:
   def nonCurry : (Int, Int, Boolean) => Boolean = (x: Int, y: Int, b: Boolean) => (x<=y)==b
   def nonCurryShort(x: Int, y: Int, b: Boolean) : Boolean = (x<=y)==b
   def nonCurryShorter:(Int, Int, Boolean) => Boolean = _ <= _ == _
-
   val nonCurryVal : (Int, Int, Boolean) => Boolean = (x: Int, y: Int, b: Boolean) => (x<=y)==b
-  val superShortNonCurryVal: (Int, Int, Boolean) => Boolean = _<=_ == _
+  val nonCurryValSuperShort: (Int, Int, Boolean) => Boolean = _<=_ == _
 
   def curry(x: Int)(y: Int)(b: Boolean) : Boolean = (x<=y)==b
   val curryVal: Int=>Int=>Boolean=>Boolean = x => y => b => (x<=y)==b
@@ -81,10 +80,9 @@ object Es2 extends App:
       case 0 => b
     _power(1, exponent)
 
-
   //3.8
-  val getLastDigit :(Int) => Int = _ % 10
-  val removeLastDigit : (Int) => Int = _ / 10
+  val getLastDigit : Int => Int = _ % 10
+  val removeLastDigit : Int => Int = _ / 10
   val addDigitToTail : (Int, Int) => Int = _ * 10 + _
 
   def reverseNumber(n: Int): Int =
