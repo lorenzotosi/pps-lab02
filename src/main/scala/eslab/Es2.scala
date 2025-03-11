@@ -65,4 +65,18 @@ object Es2 extends App:
   println(genericCompose(f, genericCompose(g,h))(3))//ok
 
   //TASK 3
-  
+  //3.7
+  def power(base: Double, exponent: Int): Double = exponent match
+    case i if exponent > 0 => base * power(base, exponent - 1)
+    case 0 => 1
+
+  def powerTail(base: Double, exponent: Int): Double =
+    @annotation.tailrec
+    def _power(b: Double, exp : Int): Double = exp match
+      case i if exp > 0 => _power(base * b, exp - 1)
+      case 0 => b
+    _power(1, exponent)
+
+
+  //3.8
+  def reverseNumber(n: Int): Int = 

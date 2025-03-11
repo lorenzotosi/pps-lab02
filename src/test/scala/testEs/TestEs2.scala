@@ -73,3 +73,22 @@ class TestEs2:
   @Test def testComposeThree(): Unit = {
     assertEquals(composeThree[Int, Int, String, String](_ + "!", _.toString, _ * 2)(3), "6!")
   }
+
+  @Test def testRecursivePowerFunction(): Unit = {
+    assertEquals(25.0, power(5, 2), 0.1)
+    assertEquals(8.0, power(2, 3), 0.1)
+
+  }
+
+  @Test def testRecursivePowerFunctionTail(): Unit = {
+    println(powerTail(5, 4))
+    println(powerTail(2, 8))
+
+    assertEquals(25.0, powerTail(5, 2), 0.1)
+    assertEquals(8.0, powerTail(2, 3), 0.1)
+  }
+  
+  @Test def testReverseNumbers(): Unit = {
+    assertEquals(reverseNumber(12345), 54321)
+  }
+
