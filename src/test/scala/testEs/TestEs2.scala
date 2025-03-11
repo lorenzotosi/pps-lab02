@@ -87,8 +87,9 @@ class TestEs2:
     assertEquals(25.0, powerTail(5, 2), 0.1)
     assertEquals(8.0, powerTail(2, 3), 0.1)
   }
-  
+
   @Test def testReverseNumbers(): Unit = {
-    assertEquals(reverseNumber(12345), 54321)
+    assertEquals(54321, reverseNumber(12345))
+    assertEquals(112233, reverseNumber(332211))
   }
 

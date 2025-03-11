@@ -1,5 +1,7 @@
 package eslab
 
+import scala.annotation.tailrec
+
 object Es2 extends App:
 
   val pos = "Positive"
@@ -79,4 +81,16 @@ object Es2 extends App:
 
 
   //3.8
-  def reverseNumber(n: Int): Int = 
+  val getLastDigit :(Int) => Int = _ % 10
+  val removeLastDigit : (Int) => Int = _ / 10
+  val addDigitToTail : (Int, Int) => Int = _ * 10 + _
+
+  def reverseNumber(n: Int): Int =
+    @annotation.tailrec
+    def _builder(acc: Int, current: Int, numb: Int): Int = acc match
+      case 0 => current
+      case _ =>
+        val x = getLastDigit(numb)
+        val y = removeLastDigit(numb)
+        _builder(acc -1, addDigitToTail(current, x), y)
+    _builder(n.toString.length, 0, n)
