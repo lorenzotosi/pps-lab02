@@ -1,7 +1,6 @@
 package eslab
 
-
-import eslab.Es2.Expr.{Add, Literal, Multiply}
+import eslab.Es2.Expr.*
 
 import scala.annotation.tailrec
 
@@ -113,3 +112,15 @@ object Es2 extends App:
       case Literal(n) => n.toString
       case Add(x, y) => "(" concat show(x) concat " + " concat show(y) concat ")"
       case Multiply(x, y) => "(" concat show(x) concat " * " concat show(y) concat ")"
+
+//Task 5,
+// ho copiato dall'altro file la map e la filter che ho implementato, le ho commentate così non ho errori
+// tutti i test passano
+      
+//  def map[A, B](optional: Optional[A], f: A => B): Optional[B] = optional match
+//    case Maybe(value) => Maybe(f(value))
+//    case _ => Empty()
+//
+//  def filter[A, B](optional: Optional[A], f: A => B): Optional[A] = optional match
+//    case Maybe(value) if f(value) == true => Maybe(value)
+//    case _ => Empty()

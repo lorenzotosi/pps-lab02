@@ -37,3 +37,21 @@ class OptionalTest:
     val result = Optional.map(nonEmpty, _ + 1)
     assertEquals(1, Optional.orElse(result, 1))
   }
+
+  @Test def mapShouldReturnTransformedValueWhenNonEmpty1(): Unit = {
+    val nonEmpty = Optional.Maybe(15)
+    val result = Optional.map(nonEmpty, _ * 4)
+    assertEquals(60, Optional.orElse(result, 60))
+  }
+
+  @Test def filterTrue(): Unit = {
+    val nonEmpty = Optional.Maybe(15)
+    val result = Optional.filter(nonEmpty, _ > 6)
+    assertFalse(Optional.isEmpty(result))
+  }
+
+  @Test def filterFalse(): Unit = {
+    val nonEmpty = Optional.Maybe(15)
+    val result = Optional.filter(nonEmpty, _ < 6)
+    assertTrue(Optional.isEmpty(result))
+  }
