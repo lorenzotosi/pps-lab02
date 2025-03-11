@@ -1,5 +1,8 @@
 package eslab
 
+
+import eslab.Es2.Expr.{Add, Literal, Multiply}
+
 import scala.annotation.tailrec
 
 object Es2 extends App:
@@ -22,7 +25,7 @@ object Es2 extends App:
   //def neg(fun: String => Boolean) : String => Boolean = x => !fun(x)
   def neg(fun: String => Boolean): String => Boolean = !fun(_)
 
-  val negVal: (String => Boolean) => String => Boolean = (fun: String => Boolean) => ((v: String) => !fun(v))
+  val negVal: (String => Boolean) => String => Boolean = (fun: String => Boolean) => (v: String) => !fun(v)
 
   val negValShort: (String => Boolean) => String => Boolean = fun => !fun(_)
 
@@ -64,7 +67,7 @@ object Es2 extends App:
   def g: Int => String = _.toString
   def f: String => String = _ concat "!"
   //f(g(h(x)))
-  println(genericCompose(f, genericCompose(g,h))(3))//ok
+  genericCompose(f, genericCompose(g,h))(3)//ok
 
   //TASK 3
   //3.7
@@ -94,3 +97,19 @@ object Es2 extends App:
         val y = removeLastDigit(numb)
         _builder(acc -1, addDigitToTail(current, x), y)
     _builder(n.toString.length, 0, n)
+
+//TASK 4
+  enum Expr:
+    case Literal(x: Int)
+    case Add(x: Expr, y: Expr)
+    case Multiply(x: Expr, y: Expr)
+
+  object Operations:
+    def evaluate(expr: Expr): Int = expr match
+      case Literal(n) => n
+      case Add(x, y) => evaluate(x) + evaluate(y)
+      case Multiply(x, y) => evaluate(x) * evaluate(y)
+    def show(expr: Expr): String = expr match
+      case Literal(n) => n.toString
+      case Add(x, y) => "(" concat show(x) concat " + " concat show(y) concat ")"
+      case Multiply(x, y) => "(" concat show(x) concat " * " concat show(y) concat ")"

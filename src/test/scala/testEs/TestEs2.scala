@@ -3,6 +3,7 @@ package testEs
 import org.junit.*
 import org.junit.Assert.*
 import eslab.Es2.*
+import eslab.Es2.Expr.{Add, Literal, Multiply}
 import org.junit.jupiter.api.Assertions.assertAll
 
 class TestEs2:
@@ -93,3 +94,9 @@ class TestEs2:
     assertEquals(112233, reverseNumber(332211))
   }
 
+  @Test def testTask4(): Unit = {
+    println(Operations.show(Add(Expr.Literal(3), Multiply(Literal(5), Literal(9)))))
+    println(Operations.show(Add(Expr.Literal(3), Multiply(Literal(5), Add(Expr.Literal(150), Expr.Literal(97))))))
+    assertEquals(48, Operations.evaluate(Add(Expr.Literal(3), Multiply(Literal(5), Literal(9)))))
+    assertEquals(1238, Operations.evaluate(Add(Expr.Literal(3), Multiply(Literal(5), Add(Expr.Literal(150), Expr.Literal(97))))))
+  }
