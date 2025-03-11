@@ -52,7 +52,17 @@ object Es2 extends App:
   val sub: (Int, Int) => Int = _ - _
   val mul: (Int, Int) => Int = _ * _
   println(genericCompose(sub(_, 1), mul(_, 2))(5)) //ok, 9
+  println(genericCompose[Int, Int, Int](_ - 1, _ * 2)(5)) //ok, 9
 
   //2.6
   def composeThree[A,B,C,D](f: C => D, g: B => C, h: A => B): A => D = x => f(g(h(x)))
-  composeThree[Int, Int, String, String](_ + "!", _.toString, _ * 2)(3)//ok
+  println(composeThree[Int, Int, String, String](_ + "!", _.toString, _ * 2)(3))//ok
+  //Can you implement this by reusing your generic compose function?
+  def h: Int => Int = _ * 2
+  def g: Int => String = _.toString
+  def f: String => String = _ concat "!"
+  //f(g(h(x)))
+  println(genericCompose(f, genericCompose(g,h))(3))//ok
+
+  //TASK 3
+  
