@@ -5,7 +5,7 @@ import eslab.Es2.Expr.*
 import scala.annotation.tailrec
 
 object Es2 extends App:
-
+//Task 2.3 a
   val pos = "Positive"
   val neg = "Negative"
 
@@ -13,13 +13,14 @@ object Es2 extends App:
     case x if x >= 0 => pos
     case _ => neg
 
-  val positiveValFunctionLiteral : Int => String = (x: Int) => x match
+  val positiveValFunctionLiteral: Int => String = (x: Int) => x match
     case x if x >= 0 => pos
     case _ => neg
 
-  val positiveValShort = (x:Int) => x match
+  val positiveValShort = (x: Int) => x match
       case x if x >= 0 => pos
       case _ => neg
+  //Task 2.3 b
 
   //def neg(fun: String => Boolean) : String => Boolean = x => !fun(x)
   def neg(fun: String => Boolean): String => Boolean = !fun(_)
@@ -29,28 +30,28 @@ object Es2 extends App:
   val negValShort: (String => Boolean) => String => Boolean = fun => !fun(_)
 
   val empty : String => Boolean = _ == ""
-
   val notEmpty = negVal(empty) // which type of notEmpty?
   println(notEmpty("foo")) // true
   println(notEmpty("")) // false
   println(notEmpty("foo") && !notEmpty("")) // true.. a comprehensive test
 
-  def negWithGenerics[A](fun:A => Boolean): A => Boolean = !fun(_)
+  //Task 2.3 c
+  def negWithGenerics[A](fun: A => Boolean): A => Boolean = !fun(_)
 
   //2.4
-  def nonCurry : (Int, Int, Boolean) => Boolean = (x: Int, y: Int, b: Boolean) => (x<=y)==b
-  def nonCurryShort(x: Int, y: Int, b: Boolean) : Boolean = (x<=y)==b
+  def nonCurry : (Int, Int, Boolean) => Boolean = (x: Int, y: Int, b: Boolean) => (x <= y) == b
+  def nonCurryShort(x: Int, y: Int, b: Boolean) : Boolean = (x <= y) == b
   def nonCurryShorter:(Int, Int, Boolean) => Boolean = _ <= _ == _
-  val nonCurryVal : (Int, Int, Boolean) => Boolean = (x: Int, y: Int, b: Boolean) => (x<=y)==b
-  val nonCurryValSuperShort: (Int, Int, Boolean) => Boolean = _<=_ == _
+  val nonCurryVal : (Int, Int, Boolean) => Boolean = (x: Int, y: Int, b: Boolean) => (x <= y) == b
+  val nonCurryValSuperShort: (Int, Int, Boolean) => Boolean = _ <= _ == _
 
   def curry(x: Int)(y: Int)(b: Boolean) : Boolean = (x<=y)==b
-  val curryVal: Int=>Int=>Boolean=>Boolean = x => y => b => (x<=y)==b
+  val curryVal: Int => Int => Boolean => Boolean = x => y => b => (x <= y) == b
 
   //2.5
   def compose(f: Int => Int, g: Int => Int): Int => Int = x => f(g(x))
 
-  def genericCompose[A,B,C](f:B => C, g:A => B) : A => C = x => f(g(x))
+  def genericCompose[A,B,C](f: B => C, g: A => B) : A => C = x => f(g(x))
 
   val sub: (Int, Int) => Int = _ - _
   val mul: (Int, Int) => Int = _ * _
@@ -61,11 +62,11 @@ object Es2 extends App:
   def composeThree[A,B,C,D](f: C => D, g: B => C, h: A => B): A => D = x => f(g(h(x)))
   println(composeThree[Int, Int, String, String](_ + "!", _.toString, _ * 2)(3))//ok
   //Can you implement this by reusing your generic compose function?
+  //f(g(h(x)))
   def h: Int => Int = _ * 2
   def g: Int => String = _.toString
   def f: String => String = _ concat "!"
-  //f(g(h(x)))
-  genericCompose(f, genericCompose(g,h))(3)//ok
+  genericCompose(f, genericCompose(g, h))(3)//ok
 
   //TASK 3
   //3.7
@@ -75,7 +76,7 @@ object Es2 extends App:
 
   def powerTail(base: Double, exponent: Int): Double =
     @annotation.tailrec
-    def _power(b: Double, exp : Int): Double = exp match
+    def _power(b: Double, exp: Int): Double = exp match
       case i if exp > 0 => _power(base * b, exp - 1)
       case 0 => b
     _power(1, exponent)
@@ -112,9 +113,8 @@ object Es2 extends App:
       case Multiply(x, y) => "(" concat show(x) concat " * " concat show(y) concat ")"
 
 //Task 5,
-// ho copiato dall'altro file la map e la filter che ho implementato, le ho commentate così non ho errori
-// tutti i test passano
-      
+// ho copiato dall'altro file la map e la filter che ho implementato, le ho commentate così non ho errori qui
+
 //  def map[A, B](optional: Optional[A], f: A => B): Optional[B] = optional match
 //    case Maybe(value) => Maybe(f(value))
 //    case _ => Empty()
